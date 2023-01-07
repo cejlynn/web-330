@@ -3,5 +3,5 @@
 <ul>
   <li>Caitlynne Johnson</li>
   <li>Professor Krasso</li>
-  
+  <br><br>
   Repository for WEB330-339A Enterprise JavaScript II
