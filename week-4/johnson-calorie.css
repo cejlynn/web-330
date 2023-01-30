@@ -1,0 +1,17 @@
+/*
+Title: Assignment 4.2 Calorie App
+File Name: johnson-calorie.css
+Date: 1/28/2023
+Description: Css for johnson-calorie.html */
+
+
+#foodList {
+    float: right;
+    color: #df546a;
+    font-size: 12px;
+    letter-spacing:2px;
+}
+
+table {
+    width: 20% !important;
+}
