@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <!--
+            Title: Assignment 6.2 Future Value App
+            File Name: johnson-future-value.html
+            Date: 2/8/2023
+            Description:  Working with data validation, complex class types, and more static functions. 
+        -->
+
+        <title>WEB 330 - Enterprise JavaScript II </title>
+
+        <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Links -->
+  <link rel="stylesheet" type="text/css" href="site.css">
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <link rel="stylesheet" href="johnson-future-value.css">
+  <link rel="stylesheet" href="flex-layout.css">
+ <script src="theme.js" async></script>
+
+</head>
+
+<body class="light-theme">
+
+    <div class="assign-container">
+
+        <h1 class="app-header">Welcome to the Future Value App! </h1>
+
+         <!-- Card container for input -->
+         <div class="assign-content">
+          <div class="card">
+              <div class="card-title">Future Value Calculator</div>
+              <div class="card-content">
+
+                <div class="row">
+                  <div class="col-12 danger" id="errorLog"></div>
+                </div>
+
+                <div class="form">
+
+                  <div class="row">
+                    <div class="col-5 form-field">Monthly Payment:</div>
+                    <input type="text" class="col-7 input form-field form-label" id="txtMonthlyPayment">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5 form-field">Interest Rate:</div>
+                    <input type="text" class="col-7 input form-field form-label" id="txtYearlyRate">
+                  </div>
+
+                  <!-- shows a danger message -->
+
+                  <i class="danger">
+                    Enter 11.1% as 11.1 
+                  </i>
+
+                  <div class="row">
+                    <div class="col-5 form-field"> Number of Years:</div>
+                    <select class="col-7 drop-down-menu" id="listNumOfYears">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+
+                  <!-- button -->
+                  <div class="row">
+                    <div class="form-field">
+                      <button class="btn btn-primary full-width" id="btnCalculate">Calculate</button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+          
+          <br>
+
+           <!-- Return link -->
+<a href="https://cejlynn.github.io/web-330/" class="return-home">Return</a>
+</div>
+
+<div class="assign-container">
+  <div class="assign-content">
+    <div class="card">
+      <div class="card-title">Calculation as of <span id="today"></span></div>
+      <div class="card-content assign-results-text" id="futureValue">
+        <!-- Populate futureValue -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+
+// Import statements
+import { FinanceCalculator } from "./finance-calculator.js";
+import { Validator } from "./validator.js";           
+
+// Local date
+document.getElementById("today").innerHTML = new Date().toLocaleDateString("en-US");
+
+// Register onclick event
+document.getElementById("btnCalculate").onclick = function() {
+    
+    // Declare values;
+    let monthlyPayment = document.getElementById("txtMonthlyPayment").value;
+    let rate = document.getElementById("txtYearlyRate").value;
+    let years = document.getElementById("listNumOfYears").value;
+    let errorLogEl = document.getElementById("errorLog");
+
+    // Instantiate new Validator class
+    let monthlyPaymentValidator = new Validator("Monthly Payment", monthlyPayment); 
+
+    // Call field functions to monthlyPaymentValidator variable
+    monthlyPaymentValidator.addRequiredField();
+    monthlyPaymentValidator.addRequiredFloatField();
+    monthlyPaymentValidator.addFloatMinField(100);
+
+    // Instantiate new Validator class
+    let rateValidator = new Validator("Interest Rate", rate); 
+
+    // Call field functions to rateValidator variable
+    rateValidator.addRequiredField();
+    rateValidator.addRequiredFloatField();
+    rateValidator.addFloatMaxField(100);
+
+    let errorLog = []; 
+
+    // Output error message if not true for monthlyPaymentValidator
+    if (!monthlyPaymentValidator.validate()) {
+        for (let msg of monthlyPaymentValidator.messages) {
+            errorLog.push(msg);
+        }
+    }
+
+    // Output error message if not true for rateValidator
+    if (!rateValidator.validate()) {
+        for (let msg of rateValidator.messages) {
+            errorLog.push(msg);
+        }
+    }
+
+    if (monthlyPaymentValidator.validate() && rateValidator.validate()) {
+        errorLogEl.innerHTML = "";
+        let futureValue = FinanceCalculator.calculateFutureValue(monthlyPayment, rate, years);
+        document.getElementById("futureValue").innerHTML = "The future value is " + 
+            FinanceCalculator.convertToCurrency(futureValue); // Get converted currency value
+    } else { 
+        // Else display error message
+        errorLogEl.innerHTML = "";
+        let errorLogMessage = `<ul>`; // Start ul for error message
+        for (let msg of errorLog) { // Build error li message
+            errorLogMessage += `<li>${msg}</li>`;
+        }
+
+        errorLogMessage += `</ul>`; // End ul for error message
+        errorLogEl.innerHTML = errorLogMessage; // Bind to DOM
+    }
+
+}
+</script>
+</body>
+</html>
+

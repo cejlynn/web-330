@@ -1,0 +1,116 @@
+
+/* Body styling */
+body {
+  font-family: 'Oswald', Verdana, Arial, sans-serif;
+  
+}
+
+/* Style for container */
+
+#container {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding: 10px;
+  
+}
+
+/* Icon styling */
+
+i {
+  padding-right: 111px;
+}
+
+#icon-mode:hover {
+  cursor: pointer;
+}
+
+#icon-text {
+    padding-left: 10px;
+}
+
+.pull-right {
+    float: right;
+}
+
+/* Assign styling */
+.assign-container {
+    padding: 10px;
+}
+
+.assign-content {
+    width: 600px;
+    margin: 3% auto 0;
+}
+
+.assign-results-text {
+    text-align: center;
+    font-size: 28px;
+}
+
+/* App-header styling */
+.app-header {
+    text-align: center;
+    font-weight: 400;
+    border: none;
+    color: inherit;
+    background-color: inherit;
+}
+
+/* Return link styling */
+.return-home:link {
+    color: var(--anchor-color);
+    text-decoration: none;
+}
+
+.return-home:visited {
+    color: var(--anchor-color-visited);
+}
+
+.return-home:hover {
+    background-color: var(--anchor-color-hover);
+    color: var(--anchor-color);
+}
+
+/* Styling for form */
+.form {
+    display: inline-grid;
+    grid-template-columns: auto;
+}
+
+.form-field {
+    padding: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Table styling */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+th {
+    padding: 12px 0px;
+    text-align: left;
+    background-color: var(--table-header-background-color);
+    color: var(--table-header-color);
+}
+
+td, th {
+    border: 1px solid var(--table-border-color);
+}
+
+tr:hover {
+    background-color: var(--table-hover-background-color);
+    color: var(--table-hover-color);
+    cursor: pointer;
+}
+
+th, td {
+    padding: 10px;
+}

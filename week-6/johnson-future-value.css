@@ -1,0 +1,19 @@
+
+/*
+            Title: Assignment 6.2 Future Value App
+            File Name: johnson-future-value.css
+            Date: 2/8/2023
+            Description:  CSS for johnson-future-value.html
+            */
+
+            .danger {
+                float: right;
+                color: #df546a;
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+
+            .form-label {
+                display: inline-block;
+                padding-top: 1rem;
+            }
